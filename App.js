@@ -13,7 +13,7 @@ export default function App() {
       </TouchableWithoutFeedback>
       <TextInput
         ref={inputRef}
-        style={{ width: 0, height: 0 }}
+        style={styles.hiddenInput}
         onChangeText={setText}
         value={text}
         testID='hidden-input'
@@ -35,5 +35,9 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     backgroundColor: 'pink',
+  },
+  hiddenInput: {
+    height: 0,
+    width: 0,
   },
 });
