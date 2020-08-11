@@ -1,12 +1,23 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
 
 export default function App() {
+  const inputRef = useRef(null);
+  const [text, setText] = useState('');
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <TouchableWithoutFeedback onPress={() => inputRef.current?.focus()}>
+        <View style={styles.customInput}>
+          <Text>{text}</Text>
+        </View>
+      </TouchableWithoutFeedback>
+      <TextInput
+        ref={inputRef}
+        style={{ width: 0, height: 0 }}
+        onChangeText={setText}
+        value={text}
+        testID='hidden-input'
+      />
     </View>
   );
 }
@@ -14,8 +25,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'lightblue',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  customInput: {
+    borderWidth: 1,
+    minWidth: 100,
+    height: 50,
+    justifyContent: 'center',
+    backgroundColor: 'pink',
   },
 });
